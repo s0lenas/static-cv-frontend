@@ -7,13 +7,13 @@ const NavigationBar = () => {
             <div className="navbar-center">
                 <ul className="nav-links">
                     <li>
-                        <a href="/about">About</a>
+                        <a href="/about">ABOUT</a>
                     </li>
                     <li>
-                        <a href="/experience">Experience</a>
+                        <a href="/experience">EXPERIENCE</a>
                     </li>
                     <li>
-                        <a href="/skills">Skills</a>
+                        <a href="/skills">SKILLS</a>
                     </li>
                 </ul>
             </div>
