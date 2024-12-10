@@ -23,4 +23,13 @@ a {
     font-family: optima, sans-serif;
     color: #f6c73a;
     text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+a:hover {
+    background-color: #f6c73a;
+    color: #0c0c0c;
 }
