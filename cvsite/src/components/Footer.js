@@ -6,6 +6,7 @@ const Footer = () => {
             <p>© 2024 Herkus Krisciunas</p>
             <p>
                 <a href="https://github.com/s0lenas">GitHub</a>
+                <br></br>
                 <a href="https://www.linkedin.com/in/herkus-krisciunas/">LinkedIn</a>
             </p>
         </footer>

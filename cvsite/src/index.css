@@ -22,6 +22,15 @@ h3, h2 {
   color: #f6c73a;
 }
 
+footer {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+section {
+  padding: 0 20%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
