@@ -15,11 +15,11 @@
     gap: 40px;
 }
 
-.navbar-center .nav-links li {
+.nav-links li {
     margin-right: 1rem;
 }
 
-a {
+.nav-links a {
     font-family: optima, sans-serif;
     color: #f6c73a;
     text-decoration: none;
@@ -29,7 +29,7 @@ a {
     margin: 0 0.5rem;
 }
 
-a:hover {
+.nav-links a:hover {
     background-color: #f6c73a;
     color: #0c0c0c;
 }

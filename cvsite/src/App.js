@@ -1,10 +1,11 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import NavigationBar from './NavigationBar';
-import { About } from './About';
-import { Skills } from './Skills';
-import { Experience } from './Experience';
-import { Home } from './Home';
+import NavigationBar from './components/NavigationBar';
+import { About } from './components/About';
+import { Skills } from './components/Skills';
+import { Experience } from './components/Experience';
+import { Home } from './components/Home';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="experience" element={<Experience />}/>
             <Route path="skills" element={<Skills />}/>
           </Routes>
+          <Footer />
     </div>
   );
 }
