@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Route, Routes } from "react-router-dom";
 import NavigationBar from './components/NavigationBar';
 import { About } from './components/About';
@@ -9,6 +9,9 @@ import { Home } from './components/Home';
 import Footer from './components/Footer';
 
 function App() {
+  const [visitorCount, setvisitorCount] = useState(0);
+  const hasFetched = useRef(false);
+
   useEffect(() => {
     const postToAPI = async () => {
       console.log("Attempting to send a POST request");
@@ -28,18 +31,27 @@ function App() {
       
         const result = await response.json();
         console.log('Success:', result);
+
+        if (result?.Attributes?.count !== undefined) {
+          setvisitorCount(result.Attributes.count);
+        } else {
+          console.warn('Unexpected response structure: ', result);
+        }
       
       } catch (error) {
         console.error('Error: ', error);
       }
     };
 
-    postToAPI();
+    if (!hasFetched.current){
+      hasFetched.current = true;
+      postToAPI();
+    }
   }, []);
 
   return (
     <div>
-          <NavigationBar />
+          <NavigationBar visitorCount={visitorCount} />
           <Routes>
             <Route path="" element={<Home />}/>
             <Route path="about" element={<About />}/>

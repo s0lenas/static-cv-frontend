@@ -2,7 +2,7 @@ import React from "react"
 import "../NavigationBar.css"
 import { Link } from "react-router-dom"
 
-const NavigationBar = () => {
+const NavigationBar = ({ visitorCount }) => {
     return (
         <nav className="navbar">
             <div className="navbar-center">
@@ -20,6 +20,9 @@ const NavigationBar = () => {
                         <Link to="skills">SKILLS</Link>
                     </li>
                 </ul>
+            </div>
+            <div className="navbar-right">
+                <p>VISITOR COUNT: {visitorCount}</p>
             </div>
         </nav>
     );
