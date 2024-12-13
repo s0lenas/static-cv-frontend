@@ -12,14 +12,11 @@ function App() {
   useEffect(() => {
     const postToAPI = async () => {
       console.log("Attempting to send a POST request");
-      const apiURL = "https://keiru8niga.execute-api.eu-west-1.amazonaws.com/increment/IncrementCount"
+      const apiURL = "https://keiru8niga.execute-api.eu-west-1.amazonaws.com/increment/saveToDB"
 
       try{
         const response = await fetch(apiURL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify({
             action: 'increment',
           }),
