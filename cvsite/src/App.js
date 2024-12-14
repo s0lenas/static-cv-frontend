@@ -20,9 +20,6 @@ function App() {
       try{
         const response = await fetch(apiURL, {
           method: 'POST',
-          body: JSON.stringify({
-            action: 'increment',
-          }),
         });
       
         if (!response.ok) {
