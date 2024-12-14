@@ -16,4 +16,4 @@ jobs:
           aws-region: eu-west-1
       - name: List the S3 buckets
         run: |
-          aws s3 cp ../../cvsite/build s3://herkuskrisciunas.me
+          aws s3 cp /cvsite/build s3://herkuskrisciunas.me
