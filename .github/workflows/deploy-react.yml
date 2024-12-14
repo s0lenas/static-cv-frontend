@@ -24,11 +24,11 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
-    - name: Install dependecies
-      run: npm install
-
-    - name: Build app
-      run: npm run build --if-present
+    - name: Install dependecies and build app
+      run: |
+        cd cvsite
+        npm install
+        npm run build --if-present
 
     - name: Configure AWS Credentials Action for GitHub Actions
       uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -37,4 +37,4 @@ jobs:
         aws-region: eu-west-1
 
     - name: Upload to S3
-      run: aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}
+      run: aws s3 cp cvsite/build s3://${{ secrets.AWS_BUCKET_NAME }}
