@@ -33,7 +33,7 @@
 #     - name: Configure AWS Credentials Action for GitHub Actions
 #       uses: aws-actions/configure-aws-credentials@v4.0.2
 #       with:
-#         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsAccess-Role-O9i0CepFbbvf
+#         role-to-assume: arn:aws:iam::${{ secrets.AWS_TEST_ACCOUNT_ID }}:role/OpenID-Role-xlyalbnhz58Y
 #         aws-region: eu-west-1
 
 #     - name: Install Terraform
