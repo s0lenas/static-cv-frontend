@@ -20,10 +20,6 @@ data "aws_s3_bucket" "selected-bucket" {
     bucket = aws_s3_bucket.main-bucket.bucket
 }
 
-data "aws_s3_bucket" "selected-bucket" {
-    bucket = aws_s3_bucket.bucket-1.bucket
-}
-
 resource "aws_s3_bucket_acl" "bucket-acl" {
     for_each = aws_s3_bucket.bucket
 
