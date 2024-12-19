@@ -9,38 +9,33 @@ terraform {
 
 resource "aws_s3_bucket" "bucket" {
     for_each = var.bucket_list
-    bucket = each.key
+    bucket = each.value
 }
 
 resource "aws_s3_bucket" "main-bucket" {
     bucket = "${var.bucket_name}"
 }
 
-data "aws_s3_bucket" "selected-bucket" {
-    bucket = aws_s3_bucket.main-bucket.bucket
-}
-
 resource "aws_s3_bucket_acl" "bucket-acl" {
-    for_each = aws_s3_bucket.bucket
+    for_each = var.bucket_list
 
-    bucket = each.value.id
+    bucket = aws_s3_bucket.bucket[each.key].id
     acl    = "public-read"
-    depends_on = [aws_s3_bucket_ownership_controls.aws_s3_bucket_acl_ownership]
 }
 
 resource "aws_s3_bucket_ownership_controls" "aws_s3_bucket_acl_ownership" {
-    for_each = aws_s3_bucket.bucket
+    for_each = var.bucket_list
 
-    bucket = each.value.id
+    bucket = aws_s3_bucket.bucket[each.key].id
     rule {
         object_ownership = "BucketOwnerPreferred"
     }
-    depends_on = [aws_s3_bucket_public_access_block.block]
 }
 
 resource "aws_s3_bucket_public_access_block" "block" {
-    for_each = aws_s3_bucket.bucket
-    bucket = each.value.id
+    for_each = var.bucket_list
+
+    bucket = aws_s3_bucket.bucket[each.key].id
 
     block_public_acls       = false
     block_public_policy     = false
@@ -49,7 +44,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-    bucket = data.aws_s3_bucket.selected-bucket.id
+    bucket = data.aws_s3_bucket.main_bucket.id
     policy = data.aws_iam_policy_document.iam-policy-1.json
 }
 
@@ -67,11 +62,10 @@ data "aws_iam_policy_document" "iam-policy-1" {
         identifiers = ["*"]
     }
     }
-    depends_on = [aws_s3_bucket_public_access_block.block]
 }
 
 resource "aws_s3_bucket_website_configuration" "website-config" {
-    bucket = data.aws_s3_bucket.selected-bucket.bucket
+    bucket = aws_s3_bucket.main_bucket.id
     index_document {
         suffix = "index.html"
     }
