@@ -31,7 +31,7 @@ resource "aws_s3_bucket_acl" "bucket-acl" {
 resource "aws_s3_bucket_ownership_controls" "aws_s3_bucket_acl_ownership" {
     for_each = aws_s3_bucket.bucket
 
-    bucket = data.each.value.id
+    bucket = each.value.id
     rule {
         object_ownership = "BucketOwnerPreferred"
     }
@@ -40,7 +40,7 @@ resource "aws_s3_bucket_ownership_controls" "aws_s3_bucket_acl_ownership" {
 
 resource "aws_s3_bucket_public_access_block" "block" {
     for_each = aws_s3_bucket.bucket
-    bucket = data.each.value.id
+    bucket = each.value.id
 
     block_public_acls       = false
     block_public_policy     = false
