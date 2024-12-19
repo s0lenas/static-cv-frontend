@@ -11,5 +11,5 @@ variable "region" {
     default = "eu-west-1"
 }
 variable "bucket_list" {
-    type = list
+    type = map(string)
 }
