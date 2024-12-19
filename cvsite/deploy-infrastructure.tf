@@ -7,6 +7,10 @@ terraform {
     }
 }
 
+provider "aws" {
+    region = "eu-west=1"
+}
+
 resource "aws_s3_bucket" "bucket" {
     for_each = var.bucket_list
     bucket = each.value

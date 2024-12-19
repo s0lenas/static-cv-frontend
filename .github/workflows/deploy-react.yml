@@ -57,8 +57,8 @@ jobs:
       run: |
         cd cvsite
         terraform init
-        terraform plan -var-file=terraform.tfvars
-        terraform apply -var-file=terraform.tfvars -auto-approve
+        TF_LOG=DEBUG terraform plan -var-file=terraform.tfvars
+        TF_LOG=DEBUG terraform apply -var-file=terraform.tfvars -auto-approve
 
     # - name: Plan Terraform Changes
     #   run: 
