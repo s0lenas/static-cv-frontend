@@ -44,7 +44,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-    bucket = aws_s3_bucket.main_bucket.bucket
+    bucket = aws_s3_bucket.main-bucket.bucket
     policy = data.aws_iam_policy_document.iam-policy-1.json
 }
 
@@ -65,7 +65,7 @@ data "aws_iam_policy_document" "iam-policy-1" {
 }
 
 resource "aws_s3_bucket_website_configuration" "website-config" {
-    bucket = aws_s3_bucket.main_bucket.bucket
+    bucket = aws_s3_bucket.main-bucket.bucket
     index_document {
         suffix = "index.html"
     }
