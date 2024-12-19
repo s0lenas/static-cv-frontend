@@ -12,10 +12,6 @@ resource "aws_s3_bucket" "bucket" {
     bucket = each.value
 }
 
-data "aws_s3_bucket" "main-bucket" {
-    bucket = lookup(var.bucket_list, var.main_bucket_key)
-}
-
 resource "aws_s3_bucket_acl" "bucket-acl" {
     for_each = var.bucket_list
 
@@ -41,6 +37,10 @@ resource "aws_s3_bucket_public_access_block" "block" {
     block_public_policy     = false
     ignore_public_acls      = false
     restrict_public_buckets = false
+}
+
+data "aws_s3_bucket" "main-bucket" {
+    bucket = lookup(var.bucket_list, var.main_bucket_key)
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
