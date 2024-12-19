@@ -19,14 +19,7 @@ resource "aws_s3_bucket_acl" "bucket-acl" {
     acl    = "public-read"
 }
 
-resource "aws_s3_bucket_ownership_controls" "aws_s3_bucket_acl_ownership" {
-    for_each = var.bucket_list
 
-    bucket = aws_s3_bucket.bucket[each.key].id
-    rule {
-        object_ownership = "BucketOwnerPreferred"
-    }
-}
 
 resource "aws_s3_bucket_public_access_block" "block" {
     for_each = var.bucket_list
