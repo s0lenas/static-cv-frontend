@@ -13,3 +13,8 @@ variable "region" {
 variable "bucket_list" {
     type = map(string)
 }
+
+variable "main_bucket_key" {
+    type = string
+    default = "bucket1"
+}

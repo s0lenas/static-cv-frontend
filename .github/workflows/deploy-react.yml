@@ -50,6 +50,7 @@ jobs:
             bucket1 = "${{ secrets.AWS_BUCKET_NAME }}",
             bucket2 = "www.${{ secrets.AWS_BUCKET_NAME }}"
         }
+        main_bucket_key = "bucket1"
         EOF
 
     - name: Initialize, plan, and apply Terraform
