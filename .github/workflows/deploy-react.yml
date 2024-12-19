@@ -24,11 +24,11 @@ jobs:
     #     node-version: '18'
     #     cache: 'npm'
 
-    - name: Install dependecies and build app
-      run: |
-        cd cvsite
-        npm install
-        npm run build --if-present
+    # - name: Install dependecies and build app
+    #   run: |
+    #     cd cvsite
+    #     npm install
+    #     npm run build --if-present
 
     - name: Configure AWS Credentials Action for GitHub Actions
       uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -46,7 +46,10 @@ jobs:
         cat <<EOF > cvsite/terraform.tfvars
         domain_name = "${{ secrets.AWS_BUCKET_NAME }}"
         bucket_name = "${{ secrets.AWS_BUCKET_NAME }}"
-        bucket_list = ["${{ secrets.AWS_BUCKET_NAME }}", "www.${{ secrets.AWS_BUCKET_NAME }}"]
+        bucket_list = {
+            bucket1 = "${{ secrets.AWS_BUCKET_NAME }}",
+            bucket2 = "www.${{ secrets.AWS_BUCKET_NAME }}"
+        }
         EOF
 
     - name: Initialize, plan, and apply Terraform
