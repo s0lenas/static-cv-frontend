@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
     region = "eu-west-1"
-    assume_role_with_web_identity {
+    assume_role {
         role_arn = "arn:aws:iam::${var.aws_test_account_id}:role/OpenID-Role-xlyalbnhz58Y"
         session_name = "github_action_session"
         web_identity_token_file = "../tmp/web_identity_token_file"
