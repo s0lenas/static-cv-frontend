@@ -13,8 +13,10 @@ variable "region" {
 variable "bucket_list" {
     type = map(string)
 }
-
 variable "main_bucket_key" {
     type = string
     default = "bucket1"
+}
+variable "aws_test_account_id" {
+    type = string
 }
