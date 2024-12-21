@@ -8,17 +8,16 @@ terraform {
 }
 
 
-data "aws_sts_assume_role_with_web_identity" "github_oidc" {
-    role_arn                  = "arn:aws:iam::${var.aws_test_account_id}:role/OpenID-Role-xlyalbnhz58Y"
-    role_session_name         = "github_action_session"
-    web_identity_token_file   = "../tmp/web_identity_token_file"
-}
-
 provider "aws" {
-    region     = "eu-west-1"
-    access_key = data.aws_sts_assume_role_with_web_identity.github_oidc.credentials[0].access_key_id
-    secret_key = data.aws_sts_assume_role_with_web_identity.github_oidc.credentials[0].secret_access_key
-    token      = data.aws_sts_assume_role_with_web_identity.github_oidc.credentials[0].session_token
+
+    assume_role_with_web_identity {
+
+        role_arn = "arn:aws:iam::${var.aws_test_account_id}:role/OpenID-Role-xlyalbnhz58Y"
+        session_name = "github_action_session"
+        web_identity_token_file = "/tmp/web_identity_token_file"
+
+    }
+
 }
 
 resource "aws_s3_bucket" "bucket" {
