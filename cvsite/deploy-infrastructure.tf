@@ -2,22 +2,18 @@ terraform {
     required_providers {
         aws = {
             source = "hashicorp/aws"
-            version = ">= 4.2.0"
+            version = "~> 5.0"
         }
     }
 }
 
 
 provider "aws" {
-
     assume_role_with_web_identity {
-
         role_arn = "arn:aws:iam::${var.aws_test_account_id}:role/OpenID-Role-xlyalbnhz58Y"
         session_name = "github_action_session"
         web_identity_token_file = "/tmp/web_identity_token_file"
-
     }
-
 }
 
 resource "aws_s3_bucket" "bucket" {
