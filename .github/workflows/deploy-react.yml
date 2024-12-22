@@ -65,6 +65,7 @@ jobs:
     - name: Initialize, plan, and apply Terraform
       run: |
         cd cvsite
+        aws s3 ls
         terraform init -upgrade
         terraform plan -var-file=terraform.tfvars
         terraform apply -var-file=terraform.tfvars -auto-approve
