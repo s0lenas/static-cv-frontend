@@ -48,29 +48,32 @@ resource "aws_s3_bucket_public_access_block" "block" {
     restrict_public_buckets = false
 }
 
+resource "aws_s3_bucket_policy" "bucket_policy" {
+    for_each = var.bucket_list
+
+    bucket = aws_s3_bucket.bucket[each.key].id
+    
+    policy = jsonencode(
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": [
+                "arn:aws:s3:::${var.bucket_name}",
+                "arn:aws:s3:::${var.bucket_name}/*"
+            ]
+        }
+        ]
+    }   
+)
+}
+
 data "aws_s3_bucket" "main-bucket" {
     bucket = lookup(var.bucket_list, var.main_bucket_key)
-}
-
-resource "aws_s3_bucket_policy" "bucket_policy" {
-    bucket = data.aws_s3_bucket.main-bucket.bucket
-    policy = data.aws_iam_policy_document.iam-policy-1.json
-}
-
-data "aws_iam_policy_document" "iam-policy-1" {
-    statement {
-        sid = "PublicReadGetObject"
-        effect = "Allow"
-    resources = [
-        "arn:aws:s3:::${var.bucket_name}",
-        "arn:aws:s3:::${var.bucket_name}/*",
-    ]
-    actions = ["S3:GetObject"]
-    principals {
-        type = "*"
-        identifiers = ["*"]
-    }
-    }
 }
 
 resource "aws_s3_bucket_website_configuration" "website-config" {
