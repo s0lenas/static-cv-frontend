@@ -59,7 +59,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 
 data "aws_iam_policy_document" "iam-policy-1" {
     statement {
-        sid = "AllowPublicRead"
+        sid = "PublicReadGetObject"
         effect = "Allow"
     resources = [
         "arn:aws:s3:::${var.bucket_name}",
