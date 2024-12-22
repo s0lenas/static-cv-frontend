@@ -59,7 +59,7 @@ jobs:
     
     - name: Test Role Assumption
       run: |
-        aws sts assume-role-with-web-identity --role-arn "arn:aws:iam::${{ secrets.AWS_TEST_ACCOUNT_ID }}:role/OpenID-Role-xlyalbnhz58Y" --role-session-name "github_action_session" --web-identity-token file://tmp/web_identity_token_file
+        aws sts assume-role-with-web-identity --role-arn "arn:aws:iam::${{ secrets.AWS_TEST_ACCOUNT_ID }}:role/OpenID-Role-xlyalbnhz58Y" --role-session-name "github_action_session" --web-identity-token file:///tmp/web_identity_token_file
     
     - name: Initialize, plan, and apply Terraform
       run: |
