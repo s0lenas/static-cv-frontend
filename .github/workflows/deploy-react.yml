@@ -1,8 +1,8 @@
 name: Upload React App
 
-on:
-  push:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
     
 jobs:
   build:
@@ -51,7 +51,6 @@ jobs:
         main_bucket_key = "bucket1"
         aws_test_account_id = "${{ secrets.AWS_TEST_ACCOUNT_ID }}"
         EOF
-        cat ~/.aws/config
 
     - name: Get OIDC Token      
       id: get_oidc_token
