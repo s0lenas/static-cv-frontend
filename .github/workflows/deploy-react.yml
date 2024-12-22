@@ -66,6 +66,7 @@ jobs:
       run: |
         cd cvsite
         aws s3 ls
+        aws s3api list-buckets
         aws s3api head-bucket --bucket ${{ secrets.AWS_BUCKET_NAME }}
         # terraform init -upgrade
         # terraform plan -var-file=terraform.tfvars
