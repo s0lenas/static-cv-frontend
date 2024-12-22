@@ -72,12 +72,11 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 )
 }
 
-data "aws_s3_bucket" "main-bucket" {
-    bucket = lookup(var.bucket_list, var.main_bucket_key)
-}
-
 resource "aws_s3_bucket_website_configuration" "website-config" {
-    bucket = data.aws_s3_bucket.main-bucket.bucket
+    for_each = var.bucket_list
+
+    bucket = aws_s3_bucket.bucket[each.key].id
+    
     index_document {
         suffix = "index.html"
     }
